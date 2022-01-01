@@ -1,0 +1,4 @@
+node_modules/
+data/division/*.json
+data/members/*.json
+.env
