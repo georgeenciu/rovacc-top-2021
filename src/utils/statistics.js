@@ -5,7 +5,7 @@ const computeStatistics = (data) => {
   const statistics = data
     .map(formatObject)
     .filter(filterYear("2021"))
-    .reducer((acc, elem) => {
+    .reduce((acc, elem) => {
       const position = positions.find((pos) => pos.callsign === elem.callsign);
       if (position) {
         if (!acc.hasOwnProperty(position.facility)) {
@@ -18,8 +18,9 @@ const computeStatistics = (data) => {
 
   return Object.entries(statistics).reduce(
     (acc, element) => {
-      acc[element[0]] = element[1];
-      acc.TOTAL += element[1];
+      const hours = element[1] / 60;
+      acc[element[0]] = hours;
+      acc.TOTAL += hours;
       return acc;
     },
     { TOTAL: 0 }
